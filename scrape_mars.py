@@ -18,9 +18,11 @@ def scrape():
     soup = BeautifulSoup(res.content,'lxml')
     table = soup.find_all('table')[0] 
     df = pd.read_html(str(table))
-    #print(df[0].to_json(orient='records'))
+#    print(df[0].to_json(orient='records'))
+    print(df[0])
     mars_facts = df[0].to_html
     mars_facts = df[0].to_json(orient='records')
+    
 
     target = "https://mars.nasa.gov/news/"
     response = requests.get(target)
@@ -91,10 +93,10 @@ def scrape():
     return masterDat
 
 
-pageDat = scrape()
+#pageDat = scrape()
 #print("----------------------------------------------------")
-dat = str(pageDat)
-print(dat)
+#dat = str(pageDat)
+#print(dat)
 
 
 
