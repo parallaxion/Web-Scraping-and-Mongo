@@ -11,19 +11,25 @@ app = Flask(__name__)
 
 @app.route('/')
 def core():
-    
+    #{{dataForTemplate[0]}}
+    #{{dataForTemplate[0]['News Title']}}
     #print(mydb.list_collection_names())
     siteDat = mycol.find()
-
+    print('1')
     dataForTemplate = mycol.find()
-    
-    print(dataForTemplate[0]['Mars Facts'])
+    print('1')
+    #print(dataForTemplate[0]['Mars Facts'])
+    print('1')
     theFactTable = json.loads(dataForTemplate[0]['Mars Facts'])
-    print(type(theFactTable))
-
-    print(client)
+    print('1')
+    #print(type(theFactTable))
+    print('1')
+    facts = dataForTemplate[0]['Mars Facts']
+    print('1')
+    #facts = facts.decode('utf-8')
+    #print(facts)
     #str(client.server_info())
-    return render_template("marstemplate.html", **locals())
+    return render_template("marstemplate.html", dataForTemplate=dataForTemplate, facts=facts)
 
     
 

@@ -18,10 +18,20 @@ def scrape():
     soup = BeautifulSoup(res.content,'lxml')
     table = soup.find_all('table')[0] 
     df = pd.read_html(str(table))
-#    print(df[0].to_json(orient='records'))
+    #print(df[0].to_json(orient='records'))
     print(df[0])
-    mars_facts = df[0].to_html
-    mars_facts = df[0].to_json(orient='records')
+    print("fuck you")
+    f = open("demofile.html", "w")
+    f.write(df[0].to_html())
+    f.close
+    mars_facts = df[0].to_html()
+    #mars_facts = df[0].to_json(orient='records')
+    #marts_facts = mars_facts.encode('utf-8')
+    print("1")
+    print(mars_facts)
+    #mars_facts = mars_facts.encode(encoding='UTF-8')
+    print("2")
+    print(mars_facts)
     
 
     target = "https://mars.nasa.gov/news/"
@@ -42,7 +52,7 @@ def scrape():
         atb = soup.find("div", {"class":"article_teaser_body"})
       #  print(atb.text)
         new_p = atb.text
-        break;
+        break
 
     jplimage= "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
 
