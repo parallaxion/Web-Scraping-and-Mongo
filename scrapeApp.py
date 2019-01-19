@@ -12,24 +12,29 @@ app = Flask(__name__)
 @app.route('/')
 def core():
     #{{dataForTemplate[0]}}
-    #{{dataForTemplate[0]['News Title']}}
+    #
+    # {{dataForTemplate[0]['News Title']}}
     #print(mydb.list_collection_names())
     siteDat = mycol.find()
     print('1')
     dataForTemplate = mycol.find()
-    print('1')
+    exists = dataForTemplate.count()
+    print('2')
     #print(dataForTemplate[0]['Mars Facts'])
     print('1')
-    theFactTable = json.loads(dataForTemplate[0]['Mars Facts'])
+    #theFactTable = json.loads(dataForTemplate[0]['Mars Facts'])
     print('1')
     #print(type(theFactTable))
     print('1')
-    facts = dataForTemplate[0]['Mars Facts']
+    #facts = dataForTemplate[0]['Mars Facts']
     print('1')
     #facts = facts.decode('utf-8')
     #print(facts)
     #str(client.server_info())
-    return render_template("marstemplate.html", dataForTemplate=dataForTemplate, facts=facts)
+    if exists != 0:
+        return render_template("marstemplate.html", dataForTemplate=dataForTemplate) #, facts=facts
+    else:
+        return render_template("marstemplate.html", dataForTemplate = [[]])
 
     
 
@@ -46,7 +51,7 @@ def scrapebutton():
    
     mycol.insert(pageDat)
         
-    return str(pageDat)
+    return redirect("/", code=302)
 
 if __name__ == "__main__":
     app.run(debug=True)

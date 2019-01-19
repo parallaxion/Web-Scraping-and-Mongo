@@ -30,7 +30,7 @@
             
                 <div class="col-sm-7">
                     <h3>Featured Mars Image</h3>
-                    <img src="https://www.jpl.nasa.gov/spaceimages/images/mediumsize/PIA19101_ip.jpg" alt="Featured Image" style="max-width: 600px" class="img-fluid"> <!-- -->
+                    <img src="{{dataForTemplate[0]['Feature Image']}}" alt="Featured Image" style="max-width: 600px" class="img-fluid"> <!-- -->
                 </div>
             
                 <div class="col-sm-3">
@@ -42,7 +42,10 @@
                         </div>
                      
                         <div class="">
-                            {{facts}}
+                                {% autoescape false %}
+                                {{dataForTemplate[0]['Mars Facts']}}
+                            {% endautoescape %}
+                                
                         <!--
                                 <p><b>Current Mars Weather</b><br>
                                     {% for fact in theFactTable %} 
